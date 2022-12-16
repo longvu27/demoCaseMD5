@@ -14,8 +14,8 @@ import {getBlogs} from "./service/blogsService";
 function App() {
     const dispatch = useDispatch();
     const blogs = useSelector(state => {
-        console.log(state);
-        return state
+
+        return state.blogs.blogs.data
     })
     useEffect(()=> {
         dispatch(getBlogs());
