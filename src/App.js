@@ -7,8 +7,19 @@ import Register from "./page/user/Register";
 import Home from "./page/home/Home";
 import ListBlog from "./page/home/blog/ListBlog";
 import AddBlog from "./page/home/blog/AddBlog";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getBlogs} from "./service/blogsService";
 
 function App() {
+    const dispatch = useDispatch();
+    const blogs = useSelector(state => {
+        console.log(state);
+        return state
+    })
+    useEffect(()=> {
+        dispatch(getBlogs());
+    },[])
   return (
     <>
       <div className="container-fluid">
