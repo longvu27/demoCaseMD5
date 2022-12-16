@@ -11,7 +11,6 @@ export default function Home() {
         </div>
             <div className="row">
                 <div className="col-12">
-                    <h1>Nội dung</h1>
                     <Outlet></Outlet>
                 </div>
             </div>
