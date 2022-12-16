@@ -1,6 +1,13 @@
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Navbar() {
+    const dispatch = useDispatch();
+    const user = useSelector(state=> {
+        console.log('nav', state.user)
+        return state.user
+    })
+
     return (
         <>
             <div className="row">
@@ -38,9 +45,10 @@ export default function Navbar() {
                                 </li>
                             </ul>
                             <form className="form-inline my-2 my-lg-0">
+                                <h4>{user.currentUser.username}</h4>
                                 {/*<input className="form-control mr-sm-2" type="search" placeholder="Search"*/}
                                 {/*       aria-label="Search">*/}
-                                    <Link to={"/"} className="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out
+                                    <Link to={"/"} className="ml-3 btn btn-outline-success my-2 my-sm-0" type="submit">Log Out
                                     </Link>
                             </form>
                         </div>

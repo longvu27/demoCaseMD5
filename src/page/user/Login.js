@@ -1,25 +1,45 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+import {login} from "../../service/userService";
+import {useDispatch, useSelector} from "react-redux";
+import {Field, Formik, Form} from "formik";
 
 export default function Login() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const dataUser = useSelector(state => {
+        return state.user.currentUser
+    })
+
     return (
         <>
             <div className="row">
                 <div className="offset-3 col-6">
                     <h1 className={"text-center mt-5"}>Login</h1>
-                    <form>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Name</label>
-                            <input type="text" className={"form-control"}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Password</label>
-                            <input type="text" className={"form-control"}/>
-                        </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                        <button type="submit" className="ml-3 btn btn-secondary">
-                            <Link to={"register"} style={{textDecoration: 'none', color:'white'}}>Register</Link>
-                        </button>
-                    </form>
+                    <Formik
+                        initialValues={{
+                            username: '',
+                            password: ''
+                        }}
+                        onSubmit={async (values) => {
+                            await dispatch(login(values))
+
+                            navigate('/home')
+
+                        }}>
+                        <Form>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">Name</label>
+                                <Field name={"username"} type="text" className={"form-control"}/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Password</label>
+                                <Field name={"password"} type="text" className={"form-control"}/>
+                            </div>
+                            <button className="btn btn-primary">Submit</button>
+                            <button className="ml-3 btn btn-secondary">Register</button>
+                        </Form>
+                    </Formik>
                 </div>
             </div>
         </>
