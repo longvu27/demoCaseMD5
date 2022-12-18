@@ -10,7 +10,10 @@ export default function Login() {
     const dataUser = useSelector(state => {
         return state.user.currentUser
     })
-
+const handleLogin = async (values) => {
+        await dispatch(login(values));
+        await navigate('/home')
+}
     return (
         <>
             <div className="row">
@@ -22,10 +25,7 @@ export default function Login() {
                             password: ''
                         }}
                         onSubmit={async (values) => {
-                            await dispatch(login(values))
-
-                            navigate('/home')
-
+                            handleLogin(values).then()
                         }}>
                         <Form>
                             <div className="form-group">

@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 export default function Navbar() {
@@ -7,6 +7,7 @@ export default function Navbar() {
         console.log('nav', state.user)
         return state.user
     })
+    const navigate = useNavigate();
 
     return (
         <>
@@ -44,13 +45,16 @@ export default function Navbar() {
                                     <a className="nav-link disabled">Disabled</a>
                                 </li>
                             </ul>
-                            <form className="form-inline my-2 my-lg-0">
+                            <div className="form-inline my-2 my-lg-0">
                                 <h4>{user.currentUser.username}</h4>
                                 {/*<input className="form-control mr-sm-2" type="search" placeholder="Search"*/}
                                 {/*       aria-label="Search">*/}
-                                    <Link to={"/"} className="ml-3 btn btn-outline-success my-2 my-sm-0" type="submit">Log Out
-                                    </Link>
-                            </form>
+                                    <button  className="ml-3 btn btn-outline-success my-2 my-sm-0" type="submit" onClick={()=> {
+                                        localStorage.clear();
+                                        navigate('/')
+                                    }}>Log Out
+                                    </button>
+                            </div>
                         </div>
                     </nav>
                 </div>

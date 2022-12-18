@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {deleteBlogs, getBlogs} from "../../../service/blogsService";
+import {deleteBlog, getBlogs} from "../../../service/blogsService";
 import {login} from "../../../service/userService";
 import {useNavigate} from "react-router-dom";
 
@@ -13,7 +13,7 @@ export default function ListBlog() {
     })
     useEffect(() => {
         dispatch(getBlogs());
-    }, [])
+    }, [1])
 
     return (
         <>
@@ -41,7 +41,7 @@ export default function ListBlog() {
                                 </p>
                                 <button
                                     onClick={() => {
-                                        dispatch(deleteBlogs(item._id))
+                                        dispatch(deleteBlog(item._id))
                                         alert('Delete Success');
                                         navigate('')
                                     }}

@@ -1,9 +1,11 @@
 import {Field, Form, Formik} from "formik";
 import {useDispatch} from "react-redux";
-import {addBlogs} from "../../../service/blogsService";
+import {addBlog} from "../../../service/blogsService";
+import {useNavigate} from "react-router-dom";
 
 export default function AddBlog() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     return (
         <>
             <div className="row">
@@ -16,8 +18,10 @@ export default function AddBlog() {
                             company: '637d58505bf491d56a8dab4f'
                         }}
                         onSubmit={(values) => {
-                            dispatch(addBlogs(values))
+                            dispatch(addBlog(values))
+                            alert('add success')
                             console.log(values)
+                            navigate('/home')
                         }}>
                         <Form>
                             <div className="mb-3">
